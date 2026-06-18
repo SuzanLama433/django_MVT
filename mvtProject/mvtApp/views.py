@@ -39,3 +39,55 @@ def simple(request):
         
         si = (amount*rate*time)/100
     return render(request,'simple.html',{'si':si})
+
+def calulator(request):
+    num1=0
+    num2=0
+    result =0
+    if request.method == "POST":
+        num1 = float(request.POST['num1'])
+        num2 = float(request.POST['num2'])
+        op = request.POST['operator']
+        result =0
+        if op =="+":
+            result = num1+num2
+        elif op == "-":
+            result =num1-num2
+        elif op == "*":
+            result = num1 *num2
+        elif op == "/":
+            if num2 == 0:
+                result= "cannot divided by zero"
+            else :
+                result =num1/num2
+    return render(request,'calculator.html' ,{'result':result})
+
+def atm(request):
+    result = ""
+    balance = 10000
+    MyPin = "1234"
+    if request.method == "POST":
+        pin1 = request.POST['pin']
+        option = request.POST['option']
+        amount = request.POST['amount']
+        
+        if pin1 == MyPin:
+            if option == 'balance':
+                result = f'your totatl balance Rs {balance}'
+            elif option == "withdraw":
+                amount = int(amount)
+
+                if amount <= balance:
+                    balance -= amount
+                    result = f"Withdraw successful. Remaining balance: Rs. {balance}"
+                else:
+                    result = "Insufficient Balance"
+                    
+            elif option == "deposit":
+                amount = int(amount)
+                balance += amount
+                result = f"Deposit successful. New balance: Rs. {balance}"
+        else:
+            result ='invalid pin'
+                
+    return render(request,'atm.html' ,{'result':result})
