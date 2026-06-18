@@ -28,7 +28,7 @@
                         <li class="nav-item">
                             <a class="nav-link active" href="{% url 'show' %}">Show</a>
                         </li>
-                            <li class="nav-item">
+                        <li class="nav-item">
                             <a class="nav-link active" href="{% url 'count' %}">Count</a>
                         </li>
                         <li class="nav-item dropdown">
@@ -62,31 +62,17 @@
             <div class="container">
                 <div class="row">
                     <div class="col-10 mx-auto my-3 alert alert-info">
-                        <form method="POST" action="{% url 'home' %}">
+                        <form method="POST" action="{% url 'count' %}">
                             {% csrf_token %}
-                            <div class="mb-3">
-                                <label for="name" class="form-label">Full Name</label>
-                                <input type="text" name="name" class="form-control" id="name"
-                                    aria-describedby="emailHelp">
+                            <h1>Count your wordss</h1>
+                            <div class="form-floating">
+                                <textarea class="form-control" name="text" placeholder="Leave a comment here" id="floatingTextarea2"
+                                    style="height: 100px"></textarea>
+                                <label for="floatingTextarea2">Comments</label>
                             </div>
-                            <div class="mb-3">
-                                <label for="age" class="form-label">Age</label>
-                                <input type="number" name="age" class="form-control" id="age"
-                                    aria-describedby="emailHelp">
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Email address</label>
-                                <input type="email" name="email" class="form-control" id="exampleInputEmail1"
-                                    aria-describedby="emailHelp">
-                            </div>
-                            <div class="mb-3">
-                                <label for="message" class="form-label">Message</label>
-                                <input type="text" name="message" class="form-control" id="message"
-                                    aria-describedby="emailHelp">
-                            </div>
-
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-success">submit</button>
                         </form>
+                        <h2>count is : {{ count }}</h2>
                     </div>
                 </div>
             </div>
