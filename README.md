@@ -65,7 +65,7 @@ Replace `YOUR_USERNAME` and `YOUR_REPO` with your GitHub account/repo. If your d
 
 ## License
 
-This project is provided under the MIT License (change as needed).
+This project is provided under the MIT License.
 
 ---
 Generated README for quickstart. Edit to add project-specific details.
