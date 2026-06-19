@@ -16,7 +16,7 @@ class Student(models.Model):
 pip install django-multiselectfield
 pip install django-phonenumber-field phonenumbers
 """ 
-GENDER_FIELD = (
+GENDER_FIELD =( 
     ('male','male'),
     ('female','female'),
     ('other','other')
@@ -26,7 +26,7 @@ SUBJECT_FIELD =(
     ('python','python')
 )
 class Contact(models.Model):
-    iswork = models.BooleanField(default=True,verbose_name="clic here if it works")
+    iswork = models.BooleanField(default=True,verbose_name="click here if it works")
     name = models.CharField(max_length=200,default="sujan",validators=[MinLengthValidator(4)])
     message = models.TextField(blank=True)
     # 32 bits sign --> -2^32 --> 2^32   

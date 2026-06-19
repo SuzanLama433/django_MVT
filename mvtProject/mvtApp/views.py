@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from .models import Student
 from django.http import HttpResponse
+import random
+from django.shortcuts import render
+
 # Create your views here.
 def home(request):
     if request.method == "POST":
@@ -91,3 +94,39 @@ def atm(request):
             result ='invalid pin'
                 
     return render(request,'atm.html' ,{'result':result})
+
+# spr game 
+def index(request):
+    return render(request,'index.html')
+
+
+def game(request):
+    user_input = ""
+    computer = ""
+    result = ""
+
+    if request.method == "POST":
+        user_input = request.POST.get("words", "")  
+        user_input = user_input.upper() if user_input else ""  
+
+        computer = random.choice(["R", "P", "S"])
+
+        if user_input not in ["R", "P", "S"]:
+            result = "Invalid Input ❌"
+
+        elif (user_input == "S" and computer == "P") or \
+             (user_input == "P" and computer == "R") or \
+             (user_input == "R" and computer == "S"):
+            result = "You Win 🎉"
+
+        elif user_input == computer:
+            result = "Draw 😐"
+
+        else:
+            result = "Computer Wins 🤖"
+
+    return render(request, "game.html", {
+        "user": user_input,
+        "computer": computer,
+        "result": result
+    })
