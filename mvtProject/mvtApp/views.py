@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Student
+from .models import Student ,Signup
 from django.http import HttpResponse
 import random
 
@@ -129,3 +129,15 @@ def game(request):
         "computer": computer,
         "result": result
     })
+    
+def signup(request):
+    if request.method == "POST":
+        firstname = request.POST['fname']
+        lastname = request.POST['lname']
+        email = request.POST['email']
+        password = request.POST['password']
+        cpassword = request.POST['cpassword']
+        user = Signup(firstname=firstname, lastname=lastname,email=email,password=password, cpassword=cpassword)
+        user.save()
+        return HttpResponse('form is submitted..')
+    return render(request,'signup.html')

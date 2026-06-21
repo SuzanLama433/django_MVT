@@ -29,5 +29,6 @@ urlpatterns = [
     path('calculator/',views.calulator,name="calculator"),
     path('atm/',views.atm,name='atm'),
     path('index/',views.index,name='index'),
-    path('game/',views.game,name='game')
+    path('game/',views.game,name='game'),
+    path('signup/',views.signup,name='signup')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
