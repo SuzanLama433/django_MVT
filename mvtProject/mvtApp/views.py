@@ -17,8 +17,17 @@ def home(request):
         return HttpResponse("your message is submitted.....")
     return render(request,'home.html')
 
+"""ORM --> object Relation mapping or mapper"""
+
 def show(request):
     data = Student.objects.all()
+    # data = Student.objects.filter(name='sujan',age='88')
+    # data = Student.objects.exclude(name='sujan')
+    # data = Student.objects.order_by('name')
+    # data = Student.objects.order_by('age')[:2]
+    # data = Student.objects.order_by('-age')[:2]
+    # data = Student.objects.order_by('?')[:2]
+
     return render(request,'show.html',{'sujan':data})
 
 def count(request):
