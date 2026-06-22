@@ -3,6 +3,7 @@ from datetime import datetime
 from django.core.validators import MaxLengthValidator,MaxValueValidator,MinValueValidator,MinLengthValidator
 from phonenumber_field.modelfields import PhoneNumberField
 from multiselectfield import MultiSelectField
+import uuid
 
 # Create your models here.
 
@@ -44,6 +45,8 @@ class Contact(models.Model):
     gender = models.CharField(max_length=20,choices=GENDER_FIELD,null=True)
     subject = MultiSelectField(choices=SUBJECT_FIELD,null=True)
     phone = PhoneNumberField(blank=True,region='NP')
+    # facebook_url = models.URLField(blank=True, null=True)
+    product_key = models.UUIDField(default=uuid.uuid4(),editable=False)
     
 class Signup(models.Model):
     firstname = models.CharField(max_length=20)
@@ -51,6 +54,34 @@ class Signup(models.Model):
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=20)
     cpassword = models.CharField(max_length=20)
+    
+class Interest(models.Model):
+    title = models.CharField(max_length=200)
+    
+    def __str__(self):
+        return self.title
+class City(models.Model):
+    title = models.CharField(max_length=200)
+    
+    def __str__(self):
+        return self.title
+
+class Person(models.Model):
+    name = models.CharField(max_length=20)
+    interest = models.ManyToManyField(Interest)
+    city = models.ForeignKey(City, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return self.name
+
+class Profile (models.Model):
+    person = models.OneToOneField(Person, on_delete=models.CASCADE)
+    bio = models.TextField()
+    profile_pic = models.ImageField(upload_to='profile/')
+    
+    def __str__(self):
+        return self.person.name
+    
     
     
     

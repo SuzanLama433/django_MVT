@@ -1,5 +1,10 @@
 from django.contrib import admin
-from .models import Contact
+from .models import *
 
 # Register your models here.
 admin.site.register(Contact)
+
+admin.site.register(Interest)
+admin.site.register(City)
+admin.site.register(Person)
+admin.site.register(Profile)
