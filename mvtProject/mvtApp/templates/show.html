@@ -49,8 +49,8 @@
                             <a class="nav-link disabled" aria-disabled="true">Disabled</a>
                         </li>
                     </ul>
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                    <form method="get" action="{% url 'show' %}" class="d-flex" role="search">
+                        <input class="form-control me-2" name="searched" type="search" placeholder="Search" aria-label="Search" />
                         <button class="btn btn-outline-success" type="submit">Search</button>
                     </form>
                 </div>
@@ -71,6 +71,8 @@
                                     <th scope="col">Age</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">message</th>
+                                    <th scope="col">DOB</th>
+
 
 
                                 </tr>
@@ -84,7 +86,10 @@
                                     <td>{{i.age}}</td>
                                     <td>{{i.email}}</td>
                                     <td>{{i.message}}</td>
+                                    <td>{{i.dob}}</td>
                                 </tr>
+                                {% empty %}
+                                <p class="alert alert-danger text-center">NO Items</p>
                                 {% endfor %}
                             </tbody>
                         </table>
@@ -92,6 +97,15 @@
                 </div>
             </div>
         </section>
+
+        <form method="get" action="{% url 'show' %}">
+            <label for="">Start Dob</label>
+            <input name="sdob" type="date">
+            <label for="">End Date</label>
+            <input name="ldob" type="date">
+
+            <input type="submit" value="search">
+        </form>
 
 
 

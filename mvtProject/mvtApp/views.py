@@ -11,8 +11,9 @@ def home(request):
         age = data['age']
         email = data['email']
         message = data['message']
+        dob = data['dob']
         
-        user = Student(name=nm,age=age,email=email,message=message) 
+        user = Student(name=nm,age=age,email=email,message=message,dob=dob) 
         user.save()
         return HttpResponse("your message is submitted.....")
     return render(request,'home.html')
@@ -27,6 +28,44 @@ def show(request):
     # data = Student.objects.order_by('age')[:2]
     # data = Student.objects.order_by('-age')[:2]
     # data = Student.objects.order_by('?')[:2]
+    
+    # get vs filter
+    # return single object
+    # data=Student.objects.get(id=2)
+    # data=Student.objects.first()
+    # data=Student.objects.last()
+    # data=Student.objects.latest('age')
+    # data=Student.objects.earliest('age')
+    # Student.objects.create(name="shyam",age=55,email="syam@gmail.com",message="hello")
+    # Student.objects.filter(id=11).update(name="syam update")
+    # Student.objects.get(id=11).delete()
+    
+    # look ups
+    # data=Student.objects.filter(name__exact='sujan')
+    # data=Student.objects.filter(name__iexact='sujan')
+    # data=Student.objects.filter(name__contains='an')
+    # data=Student.objects.filter(name__endswith='an')
+    # data=Student.objects.filter(name__startswith='s')
+    # data=Student.objects.filter(age__gt=33)
+    # data=Student.objects.filter(age__gte=33)
+    # data=Student.objects.filter(age__lte=40)
+    
+    # data=Student.objects.filter(age__range=(33,38))
+    searched = request.GET.get("searched")
+    if searched:
+        data=Student.objects.filter(name__contains=searched)
+    else:
+        data=Student.objects.all()
+    
+    # dob task start
+    sdob = request.GET.get('sdob')
+    ldob = request.GET.get('ldob')
+    
+    if sdob and ldob:
+        data = Student.objects.filter(dob__range=[sdob, ldob])
+    else:
+        data=Student.objects.all()
+    #dob task end
 
     return render(request,'show.html',{'sujan':data})
 

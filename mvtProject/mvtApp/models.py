@@ -12,6 +12,7 @@ class Student(models.Model):
     age =models.IntegerField()
     email = models.EmailField()
     message = models.TextField()
+    dob = models.DateField(null=True)
    
 """field type , option field ,extranal field , relationship
 pip install django-multiselectfield
