@@ -49,23 +49,18 @@ def show(request):
     # data=Student.objects.filter(age__gt=33)
     # data=Student.objects.filter(age__gte=33)
     # data=Student.objects.filter(age__lte=40)
-    
     # data=Student.objects.filter(age__range=(33,38))
-    searched = request.GET.get("searched")
-    if searched:
-        data=Student.objects.filter(name__contains=searched)
-    else:
-        data=Student.objects.all()
     
-    # dob task start
     sdob = request.GET.get('sdob')
     ldob = request.GET.get('ldob')
     
-    if sdob and ldob:
+    searched = request.GET.get("searched")
+    if searched:
+        data=Student.objects.filter(name__contains=searched)
+    elif sdob and ldob:
         data = Student.objects.filter(dob__range=[sdob, ldob])
     else:
         data=Student.objects.all()
-    #dob task end
 
     return render(request,'show.html',{'sujan':data})
 
